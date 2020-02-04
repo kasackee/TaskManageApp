@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>My Laravel</title>
+        <title>課題管理システム</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -12,44 +12,53 @@
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
-                color: #636b6f;
+                background-color: #f3f3f3;
+                color: #f6993f;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
                 height: 100vh;
                 margin: 0;
             }
 
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
 
             .content {
                 text-align: center;
+                width: 100%;
+                height: 400px;
+                margin-top: 200px;
+            }
+
+            .content > .window {
+                height: 400px;
             }
 
             .title {
-                font-size: 84px;
+                font-size: 64px;
+                font-weight: bold;
+                font-family: 'Hiragino Maru Gothic ProN', 'Nunito', sans-serif;
             }
 
-            .links > a {
+            .title-message {
                 color: #636b6f;
+                font-size: 28px;
+                font-family: 'Hiragino Maru Gothic ProN', 'Nunito', sans-serif;
+            }
+
+            .header {
+                text-align: right;
+                padding: 20px;
+            }
+
+            .header > .button {
+                display: inline;
+                background-color: #f6993f;
+                border-radius: 20px;
+                padding: 8px;
+                margin: 8px;
+            }
+
+            .header > .button > a {
+                color: #f3f3f3;
                 padding: 0 25px;
                 font-size: 13px;
                 font-weight: 600;
@@ -64,35 +73,41 @@
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
+        <div class="lp-wrapper">
             @if (Route::has('login'))
-                <div class="top-right links">
+                <div class="header">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <div class="button">
+                            <a href="{{ url('/home') }}">ダッシュボード</a>
+                        </div>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
+                        <div class="button">
+                            <a href="{{ route('login') }}">ログイン</a>
+                        </div>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
+                            <div class="button">
+                                <a href="{{ route('register') }}">いますぐ始める</a>
+                            </div>
                         @endif
                     @endauth
                 </div>
             @endif
 
             <div class="content">
-                <div class="title m-b-md">
-                    My Laravel
-                </div>
+                <div class="window">
+                    <div class="window-header">
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    </div>
+                    <div class="window-body">
+                        <div class="title-message">
+                            あなたの個人開発をサポート。
+                        </div>
+                        <div class="title m-b-md">
+                            プロジェクト管理システムα
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>

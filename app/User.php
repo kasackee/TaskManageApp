@@ -36,4 +36,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * ユーザーの所属するプロジェクト
+     */
+    public function projects()
+    {
+        return $this->belongsToMany('App\Project');
+    }
 }
