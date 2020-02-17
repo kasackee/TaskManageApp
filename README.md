@@ -8,3 +8,9 @@ Laravel6 + AdminLTE
 
 ローカル環境: Homestead
 
+起動方法
+
+```bash
+cd ~/Homestead
+vagrant up
+```

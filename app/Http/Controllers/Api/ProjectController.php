@@ -1,9 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Project;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use \App\Http\Requests\ProjectRequest;
+
 
 class ProjectController extends Controller
 {
@@ -14,8 +17,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return view('project/index', [
-        ]);
+        $list = Project::limit(10)->get();
+        return response()->json($list);
     }
 
     /**
@@ -25,18 +28,21 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return redirect('/api/articles');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ProjectRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProjectRequest $request)
     {
-        //
+        $project = new Project();
+        $project->fill($request->all());
+        $project->save();
+        return response()->json($project);
     }
 
     /**
