@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\Project\UpdateProjectRequest;
 use App\Project;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use \App\Http\Requests\ProjectRequest;
+use \App\Http\Requests\Project\StoreProjectRequest;
 
 
 class ProjectController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * プロジェクトを取得
      *
      * @return \Illuminate\Http\Response
      */
@@ -28,16 +28,16 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return redirect('/api/articles');
+        // return redirect('/api/articles');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * プロジェクトを登録
      *
-     * @param  \App\Http\Requests\ProjectRequest $request
+     * @param  StoreProjectRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProjectRequest $request)
+    public function store(StoreProjectRequest $request)
     {
         $project = new Project();
         $project->fill($request->all());
@@ -46,14 +46,15 @@ class ProjectController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * 指定したIDのプロジェクトを取得
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+        $project = Project::find($id);
+        return response()->json($project);
     }
 
     /**
@@ -70,23 +71,29 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  UpdateProjectRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateProjectRequest $request, $id)
     {
-        //
+        $project = Project::find($id);
+        $project->fill($request->all());
+        $project->update();
+        return response()->json($project);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy($id)
     {
-        //
+        $project = Project::find($id);
+        $is_delete = $project->delete();
+        return response()->json($is_delete);
     }
 }

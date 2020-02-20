@@ -2,34 +2,25 @@
 
 namespace App\Http\Requests;
 
+
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use \Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class ProjectRequest extends FormRequest
+class ApiRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
+     * 更新、削除時に渡されるルート引数を Request Parametersに含める。
+     * ただし、すでにキーが存在している場合は上書きしない。
      * @return array
      */
-    public function rules()
+    public function validationData()
     {
-        return [
-            'name' => 'required|max:255',
-            'description' => 'present',
-            'create_user_id' => 'required|numeric',
-        ];
+        $params = $this->all();
+        $route_params = $this->route()->parameters();
+
+        return $params + $route_params;
     }
 
     /**
