@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Project\UpdateProjectRequest;
-use App\Models\Project;
+use App\Models\Task;
 use App\Http\Controllers\Controller;
-use \App\Http\Requests\Project\StoreProjectRequest;
+use \App\Http\Requests\Task\StoreTaskRequest;
+use App\Http\Requests\Task\UpdateTaskRequest;
 
 
-class ProjectController extends Controller
+class TaskController extends Controller
 {
     /**
      * プロジェクトを取得
@@ -17,7 +17,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $list = Project::limit(10)->get();
+        $list = Task::limit(10)->get();
         return response()->json($list);
     }
 
@@ -34,15 +34,15 @@ class ProjectController extends Controller
     /**
      * プロジェクトを登録
      *
-     * @param  StoreProjectRequest $request
+     * @param  StoreTaskRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreProjectRequest $request)
+    public function store(StoreTaskRequest $request)
     {
-        $project = new Project();
-        $project->fill($request->all());
-        $project->save();
-        return response()->json($project);
+        $task = new Task();
+        $task->fill($request->all());
+        $task->save();
+        return response()->json($task);
     }
 
     /**
@@ -53,8 +53,8 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        $project = Project::find($id);
-        return response()->json($project);
+        $task = Task::find($id);
+        return response()->json($task);
     }
 
     /**
@@ -71,16 +71,16 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  UpdateProjectRequest $request
+     * @param  UpdateTaskRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProjectRequest $request, $id)
+    public function update(UpdateTaskRequest $request, $id)
     {
-        $project = Project::find($id);
-        $project->fill($request->all());
-        $project->update();
-        return response()->json($project);
+        $task = Task::find($id);
+        $task->fill($request->all());
+        $task->update();
+        return response()->json($task);
     }
 
     /**
@@ -92,8 +92,8 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-        $project = Project::find($id);
-        $is_delete = $project->delete();
+        $Task = Task::find($id);
+        $is_delete = $Task->delete();
         return response()->json($is_delete);
     }
 }

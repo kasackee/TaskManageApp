@@ -21,4 +21,7 @@ Route::group(['middleware' => ['api']], function() {
     Route::resource('project', 'Api\ProjectController', ['except' => [
         'create', 'edit'
     ]]);
+    Route::resource('task', 'Api\TaskController', ['except' => [
+        'create', 'edit'
+    ]]);
 });
